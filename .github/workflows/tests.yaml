@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "tests.yaml"
+# Estimated savings: ~2 min/run
+#
 name: 🛠️ Tests
 
 on:
@@ -10,6 +15,10 @@ on:
       - "dist/data.json"
   workflow_dispatch: {}
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
   pull-requests: write
